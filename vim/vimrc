@@ -116,7 +116,7 @@ let $CFLAGS .= " -D_GNU_SOURCE -D_XOPEN_SOURCE=600"
 let $CFLAGS .= " -pthread -lm"
 "let $CFLAGS .= " -pedantic"
 
-let $ASMFLAGS = "-m32 -Wall -Wextra "
+let $ASMFLAGS = "-m32 -Wall -Wextra -g "
 
 let g:python = 3
 
