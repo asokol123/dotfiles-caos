@@ -8,5 +8,5 @@ fi
 
 echo "Installing required packages"
 ${SUDO} apt-get update -y
-${SUDO} apt-get install -y vim curl git wget
+${SUDO} apt-get install -y vim curl git wget gdb gcc
 

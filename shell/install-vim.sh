@@ -23,6 +23,7 @@ echo "Creating required directories for vim"
 mkdir -p "$HOME/.vim/.swp"
 mkdir -p "$HOME/.vim/.undo"
 mkdir -p "$HOME/.vim/colors"
+mkdir -p "$HOME/.config/coc"
 
 echo "Downloading colorscheme"
 wget -O "$HOME/.vim/colors/wombat256mod.vim" "https://raw.githubusercontent.com/michalbachowski/vim-wombat256mod/master/colors/wombat256mod.vim"
