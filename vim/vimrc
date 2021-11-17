@@ -1,0 +1,302 @@
+" ----------------------------- Plugins ----------------------------
+
+set nocompatible
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'scrooloose/nerdtree'
+
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'luochen1990/rainbow'
+
+call plug#end()
+filetype plugin on
+
+
+" ----------------------------- Plugin options -----------------------------
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#fnametruncate = 16
+let g:airline#extensions#tabline#fnamecollapse = 2
+
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline_powerline_fonts = 1
+
+let g:rainbow_active = 1
+
+let g:UltiSnipsExpandTrigger="<c-h>"
+let g:UltiSnipsJumpForwardTrigger="<c-k>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetsDir="~/.vim/mysnippets"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
+
+" Нужно до опций компилятора
+nnoremap <SPACE> <Nop>
+let mapleader=" "
+
+
+" -------------------------- Completion options ---------------------------
+set hidden
+set updatetime=300
+set shortmess+=c
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+inoremap <silent><expr> <c-@> coc#refresh()
+if exists('*complete_info')
+    inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y><CR>" : "\<C-g>u\<CR>"
+else
+    inoremap <expr> <cr> pumvisible() ? "\<C-y><CR>" : "\<C-g>u\<CR>"
+endif
+
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nmap <silent> <leader>d :call CocAction('doHover')<Enter>
+
+nmap <silent> <leader>gd :call CocAction('jumpDefinition', 'vsplit')<Enter>
+nmap <silent> <leader>gi :call CocAction('jumpImplementation', 'vsplit')<Enter>
+nmap <silent> <leader>gy :call CocAction('jumpTypeDefinition', 'vsplit')<Enter>
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+nmap <leader>a <Plug>(coc-codeaction)
+nmap <leader>rn <Plug>(coc-rename)
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>qf  <Plug>(coc-fix-current)
+command! -nargs=0 Format :call CocAction('format')
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+
+" ---------------------------- Compiler options ----------------------------
+
+let $CXXFLAGS = "-O2 -std=gnu++2a -Wall -Wextra -Wshadow -DLOCAL -g "
+let $CXXFLAGS .= "-Werror "
+let $CXXFLAGS .= "-Wno-char-subscripts -Wno-unused-result "
+let $CXXFLAGS .= "-Wno-misleading-indentation "
+"let $CXXFLAGS .= "-fsanitize=thread "
+let $CXXFLAGS .= "-fsanitize=address,undefined "
+let $CXXFLAGS .= "-fno-sanitize-recover=all "
+
+let $CFLAGS = "-O2 -g -std=gnu11 -Wall -Werror -Wextra -fno-sanitize-recover=all"
+let $CFLAGS .= " -fsanitize=address,undefined"
+"let $CFLAGS .= " -fsanitize=thread"
+let $CFLAGS .= " -D_GNU_SOURCE -D_XOPEN_SOURCE=600"
+let $CFLAGS .= " -pthread -lm"
+"let $CFLAGS .= " -pedantic"
+
+let $ASMFLAGS = "-m32 -Wall -Wextra "
+
+let g:python = 3
+
+
+
+" ---------------------------- Vim options ----------------------------
+
+set wrap linebreak nolist
+set cino+=g0.
+set nocompatible
+set autoindent
+set smartindent
+set expandtab
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set smarttab
+set number
+set showcmd
+set matchpairs+=<:>
+set complete-=i
+set hlsearch
+set ruler
+set wildmenu
+set splitright
+set splitbelow
+set autoread
+set undofile
+set directory=~/.vim/.swp//
+set undodir=~/.vim/.undo//
+set backspace=indent,eol,start
+set timeoutlen=400
+syntax on
+let g:c_space_errors = 1
+set list
+set listchars=tab:>-,trail:.
+set backspace=indent,eol,start
+" <C-A> works on 07
+set nrformats-=octal
+" no new tab after namespace
+set incsearch
+set ignorecase
+set smartcase
+set conceallevel=1
+set shortmess+=c
+set langremap
+set encoding=utf-8
+set mouse=a
+
+set t_Co=256
+set hidden
+autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+set synmaxcol=200
+set ttyfast
+if !has('nvim')
+    set ttyscroll=3
+endif
+set lazyredraw
+set wildmenu
+set wcm=<TAB>
+
+
+
+
+
+
+
+" ---------------------------- File open options ----------------------------
+
+au FileType * setlocal formatoptions-=r formatoptions-=o
+au FileType markdown setlocal formatoptions+=r formatoptions+=o
+autocmd BufEnter *.html set shiftwidth=2
+autocmd BufEnter *.html set tabstop=2
+autocmd BufEnter *.html set softtabstop=2
+autocmd BufEnter Makefile set noet
+autocmd BufLeave Makefile set et
+
+autocmd BufEnter *.json setlocal conceallevel=0
+
+au BufRead,BufNewFile *.in setfiletype text
+au BufRead,BufNewFile *.gradle setfiletype groovy
+au BufEnter,BufRead,BufNewFile *.md setfiletype markdown
+
+
+
+autocmd BufLeave *.S set expandtab
+autocmd BufLeave *.S set tabstop=4
+autocmd BufLeave *.S set softtabstop=4
+autocmd BufLeave *.S set shiftwidth=4
+autocmd BufEnter *.S set noexpandtab
+autocmd BufEnter *.S set tabstop=8
+autocmd BufEnter *.S set softtabstop=8
+autocmd BufEnter *.S set shiftwidth=8
+
+
+
+
+" ---------------------------- Mappings ----------------------------
+
+nmap G Gzz
+nmap j gj
+nmap k gk
+nmap <DOWN> gj
+nmap <UP> gk
+
+nnoremap gp `[v`]
+nnoremap gP `[V`]
+
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+
+
+imap {<CR> {<CR>}<Esc>O
+
+map ; :
+nnoremap q; q:i
+
+nnoremap <F1> :NERDTreeToggle<CR>
+nnoremap <F2> :UndotreeToggle<CR>
+
+
+map <F9> :call Compile()<Enter>
+map <F10> :call Run()<Enter>
+map <F7> :!clear<CR><CR>
+map <C-F9> :!g++ -g -DLOCAL -Wall -Wextra -pedantic -std=gnu++17 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector -o %< %<.cpp<CR>
+
+
+
+" ---------------------------- Colors ----------------------------
+
+colorscheme wombat256mod
+
+
+
+" ---------------------------- Compile/Run functions ----------------------------
+
+func! Compile()
+    write
+    if &filetype == "cpp" || &filetype == "c"
+        let CXXFLAGS = $CXXFLAGS
+        let CFLAGS = $CFLAGS
+
+        silent !echo
+        silent !echo -e "\033[31;1m* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\033[0;m"
+        silent make! %:r
+        if len(getqflist()) > 1
+            :!
+        endif
+        redraw!
+
+        let $CXXFLAGS = CXXFLAGS
+        let $CFLAGS = CFLAGS
+    elseif &filetype == "asm"
+        silent !echo
+        silent !echo -e "\033[31;1m* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\033[0;m"
+        silent :!sh -c "gcc $ASMFLAGS % -o %<"
+        if v:shell_error != 0
+            :!
+        endif
+        redraw!
+    elseif &filetype == "make"
+        !make
+    else
+        echom "Cannot compile file of type " . &filetype
+    endif
+    " redraw!
+endf
+
+func! Run()
+    write
+    if &filetype == "python"
+        if g:python == 3
+            !python3 %
+        else
+            !python2 %
+        endif
+    else
+        !./%<
+    endif
+endf
