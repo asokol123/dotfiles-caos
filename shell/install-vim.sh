@@ -30,4 +30,4 @@ wget -O "$HOME/.vim/colors/wombat256mod.vim" "https://raw.githubusercontent.com/
 
 echo "Setting up plugins"
 vim "+PlugInstall --sync" +qa
-vim "+CocInstall -sync coc-snippets coc-clangd" +qa
+vim "+CocInstall -sync coc-snippets coc-clangd coc-marketplace" +qa
