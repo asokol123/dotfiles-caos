@@ -1,0 +1,2 @@
+[context]
+layout = legend memory code args stack regs source trace extra
