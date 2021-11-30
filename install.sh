@@ -49,8 +49,6 @@ die() {
 parse_params "$@"
 setup_colors
 
-msg "${RED}Read params:${NOFORMAT} 123"
-
 bash -c "${script_dir}/shell/install-packages.sh"
 bash -c "${script_dir}/shell/install-nvm.sh"
 bash -c "${script_dir}/shell/install-nodejs.sh"
