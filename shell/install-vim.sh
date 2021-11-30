@@ -1,4 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+trap cleanup SIGINT SIGTERM ERR EXIT
+
+script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
+data_dir=${script_dir}/..
+
+cleanup() {
+    trap - SIGINT SIGTERM ERR EXIT
+    # script cleanup here
+}
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 
 echo "Installing vim-plug - plugin manager for vim"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -16,7 +30,7 @@ if [ -f "${VIMRC_NAME}" ]; then
     mv "${VIMRC_NAME}" "${VIMRC_BACKUP_NAME}"
 fi
 
-cp "./vim/vimrc" "${VIMRC_NAME}"
+cp "${data_dir}/vim/vimrc" "${VIMRC_NAME}"
 
 
 echo "Creating required directories for vim"
