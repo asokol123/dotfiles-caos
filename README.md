@@ -1,6 +1,8 @@
 # dotfiles-caos
 Пока поддерживаются только `ubuntu`/`debian`/`mint`/etc
 
+**ВАЖНО** после установки перезапустить `shell`
+
 Устанавливает:
 ## vim
 Менеджер плагинов [vim-plug](https://github.com/junegunn/vim-plug)
