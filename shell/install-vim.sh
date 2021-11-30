@@ -1,4 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+trap cleanup SIGINT SIGTERM ERR EXIT
+
+cleanup() {
+    trap - SIGINT SIGTERM ERR EXIT
+    # script cleanup here
+}
 
 echo "Installing vim-plug - plugin manager for vim"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
