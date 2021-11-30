@@ -20,7 +20,7 @@ if command -v apt-get > /dev/null; then
     ${SUDO} apt-get update -y
     ${SUDO} apt-get install -y vim curl git wget gdb gcc gcc-multilib python3
 elif command -v pacman > /dev/null; then
-    ${SUDO} pacman -Sy --noconfirm vim curl git wget gdb gcc python3
+    ${SUDO} pacman -Sy --noconfirm --needed vim curl git wget gdb gcc python3
 else
     echo "Failed to install packages. Please install manually: vim curl git wget gdb gcc gcc-multilib python3"
     echo "Continue? [Y/n]"
