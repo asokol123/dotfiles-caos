@@ -3,6 +3,8 @@
 set -Eeuo pipefail
 trap cleanup SIGINT SIGTERM ERR EXIT
 
+script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
+
 cleanup() {
     trap - SIGINT SIGTERM ERR EXIT
     # script cleanup here
@@ -27,7 +29,7 @@ if [ -f "${VIMRC_NAME}" ]; then
     mv "${VIMRC_NAME}" "${VIMRC_BACKUP_NAME}"
 fi
 
-cp "./vim/vimrc" "${VIMRC_NAME}"
+cp "${script_dir}/vim/vimrc" "${VIMRC_NAME}"
 
 
 echo "Creating required directories for vim"
