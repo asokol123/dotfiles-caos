@@ -51,6 +51,6 @@ setup_colors
 
 bash -c "${script_dir}/shell/install-packages.sh"
 bash -c "${script_dir}/shell/install-nvm.sh"
-bash -c "${script_dir}/shell/install-nodejs.sh"
-bash -c "${script_dir}/shell/install-vim.sh"
-bash -c "${script_dir}/shell/install-gdb.sh"
+bash --login -c "${script_dir}/shell/install-nodejs.sh"
+bash --login -c "${script_dir}/shell/install-vim.sh"
+bash --login -c "${script_dir}/shell/install-gdb.sh"
